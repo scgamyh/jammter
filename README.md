@@ -15,7 +15,7 @@ export VIVADO_SETTINGS=/opt/Xilinx/Vivado/2019.1/settings64.sh make
 ```
 ## Build Artifacts 
 ```bash 
-wcc@wcc-dev:~/devel/ansdr-fw$ ls -AGhl build 
+wcc@wcc-dev:~/wcc/ansdr-fw$ ls -AGhl build 
 total 372M 
 -rw-rw-r-- 1 wcc 69     4月14日 11:01 boot.bif 
 -rw-rw-r-- 1 wcc 459K   4月14日 11:01 boot.bin 

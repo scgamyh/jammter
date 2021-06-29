@@ -15,7 +15,8 @@ git clone --recursive https://github.com/MicroPhase/antsdr-fw.git
 cd ansdr-fw 
 export CROSS_COMPILE=arm-linux-gnueabihf- 
 export PATH=$PATH:/opt/Xilinx/SDK/2019.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin 
-export VIVADO_SETTINGS=/opt/Xilinx/Vivado/2019.1/settings64.sh make
+export VIVADO_SETTINGS=/opt/Xilinx/Vivado/2019.1/settings64.sh
+make
 ```
 ## Build Artifacts 
 ```bash 

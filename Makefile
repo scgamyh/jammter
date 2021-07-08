@@ -200,6 +200,7 @@ clean:
 
 SDIMGDIR = $(CURDIR)/build_sdimg
 sdimg: build/
+	mkdir $(SDIMGDIR)
 	cp build/sdk/fsbl/Release/fsbl.elf 	$(SDIMGDIR)/fsbl.elf  
 	cp build/sdk/hw_0/system_top.bit 	$(SDIMGDIR)/system_top.bit
 	cp build/u-boot.elf 			$(SDIMGDIR)/u-boot.elf
@@ -215,6 +216,7 @@ sdimg: build/
 	rm $(SDIMGDIR)/system_top.bit
 	rm $(SDIMGDIR)/u-boot.elf
 	rm $(SDIMGDIR)/ramdisk.image.gz 
+	rm $(SDIMGDIR)/boot.bif
 
 
 

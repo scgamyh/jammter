@@ -5,6 +5,7 @@ This project is forked from ADI [ADALM-PLUTO ](https://github.com/analogdevicesi
 
 ## ANTSDR Schematic
 The ANTSDR  B220 schematic is in the [schematic folder](./schematic),  you can find the hardware design here.
+![block-digram](./images/block-diagram.png)
 ## Build Instructions
 The ANTSDR Firmware is built with the [Xilinx Vivado 2019.1](https://www.xilinx.com/member/forms/download/xef-vivado.html?filename=Xilinx_Vivado_SDK_Web_2019.1_0524_1430_Lin64.bin). You need to install the correct Vivado Version in your linux PC, and then, you can follow the instructions below to generate the firmware for [ANTSDR B220](https://item.taobao.com/item.htm?spm=a230r.1.14.16.34e21142YIlxqx&id=647986963313&ns=1&abbucket=2#detail).
 ```bash
@@ -19,6 +20,7 @@ export VIVADO_SETTINGS=/opt/Xilinx/Vivado/2019.1/settings64.sh
 make
 ```
 ## Build Artifacts 
+After the firmware building finished, you will see below file in the build folder. These files are used for flash updating.
 ```bash 
 wcc@wcc-dev:~/wcc/ansdr-fw$ ls -AGhl build 
 total 372M 
@@ -54,4 +56,22 @@ drwxrwxr-x 6 wcc 4,0K   4月14日 11:01 sdk
 -rw-rw-r-- 1 wcc 19K    4月14日 11:00 zynq-ant-sdr-revb.dtb 
 -rw-rw-r-- 1 wcc 19K    4月14日 11:00 zynq-ant-sdr-revc.dtb
  ```
+
+## Make SD card boot image
+After the firmware building finished, you can build the SD card boot image for [ANTSDR](https://item.taobao.com/item.htm?spm=a230r.1.14.16.34e21142YIlxqx&id=647986963313&ns=1&abbucket=2#detail). Just type the following command.
+```bash
+make sdimg
+```
+You will see the SD boot image in the build_sdimg folder. You can just copy all these files in that folder into a SD card. Plug the SD card into the ANTSDR, set the jumper into SD card boot mode.
+
+## Update Flash by DFU
+The ANTSDR also support flash boot mode. You can update the flash by DFU. Set the jumper into Flash Boot mode. When ANTSDR is power up, push the DFU button, and then, you will see the both led in the ANTSDR will turn green, now it's time to update the flash.
+You should change into the build folder first,and plug a micro USB into the OTG interface.
+```bash
+sudo dfu-util -a firmware.dfu -D ./ant.dfu
+sudo dfu-util -a boot.dfu -D ./boot.dfu
+sudo dfu-util -a uboot-env.dfu -D ./uboot-env.dfu
+sudo dfu-util -a uboot-extra-env.dfu -U ./uboot-extra-env.dfu
+```
+At last, you can recycle ANTSDR.
 

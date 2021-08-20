@@ -94,4 +94,92 @@ sudo dfu-util -a uboot-extra-env.dfu -U ./uboot-extra-env.dfu
 ```
 Now you can repower ANTSDR. 
 
-Have FUN!!!
+## More than pluto
+Have you ever used [FMCOMMS2/3/4](https://wiki.analog.com/resources/eval/user-guides/ad-fmcomms2-ebz/quickstart/zynq) before? Have you ever thought about making ANTSDR into a similar device mentioned above?
+
+ANTSDR has the potential to become such a device!
+
+ADI officially supported FMCOMMS2/3/4 devices are usually required to work with Xilinx evaluation boards. ANTSDR has devices similar to them, so a simple modification is needed to make [FMCOMMS2/3/4 image](https://wiki.analog.com/resources/tools-software/linux-software/zynq_images) run on ANTSDR.
+
+It's easy to build the FMCOMMS2/3/4 SD card images for ANTSDR, you can build the sd card image from scratch, which means you should rebuild the fpga project, generate the u-boot file, compile the linux kernel and devicetree, choose rootfs files for your system and so on.
+
+We have built the necessary file to boot the linux kernel, and released these file with recent github release [FMCOMMS2/3/4 Firmware for ANTSDR](https://github.com/MicroPhase/antsdr-fw/releases/tag/e310_v1.0).
+
+The easiest way to make ANTSDR running FMCOMMS2/3/4 image could follow these steps:
+
+- Download a pre-build images from ADI, such as [2019_R1-2020_06_22.img](http://swdownloads.analog.com/cse/2019_R1-2020_06_22.img.xz).
+
+- Prepare an SD card and burn the extracted image to the SD card.
+
+- Once the image is burned into the sd card, you can find BOOT partition and rootfs partition.
+
+- Copy the Release file (BOOT.bin, uImage, devicetree) form our [release]((https://github.com/MicroPhase/antsdr-fw/releases/tag/e310_v1.0)) into the BOOT partition.
+
+- Insert your SD card into ANTSDR, set the jumper into SD card boot mode, connect a usb to the uart and then power on the ANTSDR. You will get the following message from your serial port terminal.
+
+    ```
+    U-Boot 2018.01-21439-gd244ce5869-dirty (Aug 16 2021 - 20:26:35 +0800)
+
+    Model: Zynq ANTSDR E310
+    Board: Xilinx Zynq
+    Silicon: v3.1
+    DRAM:  ECC disabled 1 GiB
+    MMC:   sdhci@e0100000: 0 (SD)
+    SF: Detected w25q256 with page size 256 Bytes, erase size 4 KiB, total 32 MiB
+    *** Warning - bad CRC, using default environment
+
+    In:    serial@e0001000
+    Out:   serial@e0001000
+    Err:   serial@e0001000
+    Net:   ZYNQ GEM: e000b000, phyaddr 0, interface rgmii-id
+    eth0: ethernet@e000b000
+    reading uEnv.txt
+    392 bytes read in 10 ms (38.1 KiB/s)
+    Importing environment from SD ...
+    Hit any key to stop autoboot:  0
+    Device: sdhci@e0100000
+    Manufacturer ID: 2
+    OEM: 544d
+    Name: SA16G
+    Tran Speed: 50000000
+    Rd Block Len: 512
+    SD version 3.0
+    High Capacity: Yes
+    Capacity: 14.4 GiB
+    Bus Width: 4-bit
+    Erase Group Size: 512 Bytes
+    reading uEnv.txt
+    392 bytes read in 11 ms (34.2 KiB/s)
+    Loaded environment from uEnv.txt
+    Importing environment from SD ...
+    Running uenvcmd ...
+    Copying Linux from SD to RAM...
+    reading uImage
+    6484280 bytes read in 373 ms (16.6 MiB/s)
+    reading devicetree.dtb
+    20057 bytes read in 17 ms (1.1 MiB/s)
+    ** Unable to read file uramdisk.image.gz **
+    ## Booting kernel from Legacy Image at 03000000 ...
+    Image Name:   Linux-4.19.0-ga6ef26d
+    Image Type:   ARM Linux Kernel Image (uncompressed)
+    Data Size:    6484216 Bytes = 6.2 MiB
+    Load Address: 00008000
+    Entry Point:  00008000
+    Verifying Checksum ... OK
+    ## Flattened Device Tree blob at 02a00000
+    Booting using the fdt blob at 0x2a00000
+    Loading Kernel Image ... OK
+    Loading Device Tree to 1fff8000, end 1ffffe58 ... OK
+
+    Starting kernel ...
+
+    Booting Linux on physical CPU 0x0
+
+    ......
+    ......
+    ......
+
+
+    root@analog:~#
+    ```
+- Now you can use a ethernet cable connect to ANTSDR, and add ANTSDR to your software,such as Matlab2020.b and GNU Radio. With this image, ANTSDR could support 2r2t mode.

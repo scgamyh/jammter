@@ -113,7 +113,7 @@ The easiest way to make ANTSDR running FMCOMMS2/3/4 image could follow these ste
 
 - Once the image is burned into the sd card, you can find BOOT partition and rootfs partition.
 
-- Copy the Release file (BOOT.bin, uImage, devicetree) form our [release]((https://github.com/MicroPhase/antsdr-fw/releases/tag/e310_v1.0)) into the BOOT partition.
+- Copy the Release file (BOOT.bin, uImage, devicetree) form our [release](https://github.com/MicroPhase/antsdr-fw/releases/tag/e310_v1.0) into the BOOT partition.
 
 - Insert your SD card into ANTSDR, set the jumper into SD card boot mode, connect a usb to the uart and then power on the ANTSDR. You will get the following message from your serial port terminal.
 

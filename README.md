@@ -5,7 +5,9 @@ This project is forked from ADI [ADALM-PLUTO ](https://github.com/analogdevicesi
 
 ## Purchase Link
 For Chinese users: [ANTSDR 淘宝链接](https://item.taobao.com/item.htm?id=647986963313#detail)
+
 For Foreign users : [ANTSDR on AliExpress](https://www.aliexpress.com/item/1005003181244737.html?spm=5261.ProductManageOnline.0.0.15744edfIp5RL0)
+
 ## Update Info
 For now, here is a new hardware releases of ANTSDR, the hardware version will be named as **ANTSDR E310**, the older version of **ANTSDR B220** will not be spported any more. For the ANTSDR B220 user, follow the **Build Instructions** to build The corresponding firmware.
 

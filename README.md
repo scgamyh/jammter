@@ -99,6 +99,130 @@ sudo dfu-util -a uboot-extra-env.dfu -U ./uboot-extra-env.dfu
 ```
 Now you can repower ANTSDR. 
 
+### boot information for pluto firmware
+When ANTSDR is powered on, you can see the following message in serial port terminal.
+
+```
+U-Boot PlutoSDR v0.20-PlutoSDR-dirty-00055-g469a0fd988-dirty (Jul 13 2021 - 17:53:36 +0800)
+
+I2C:   ready
+DRAM:  ECC disabled 1 GiB
+MMC:   sdhci@e0100000: 0
+SF: Detected W25Q256 with page size 256 Bytes, erase size 4 KiB, total 32 MiB
+*** Warning - bad CRC, using default environment
+
+In:    serial@e0001000
+Out:   serial@e0001000
+Err:   serial@e0001000
+Model: ANT SDR Board Test
+reading uEnv.txt
+7055 bytes read in 30 ms (229.5 KiB/s)
+Importing environment from SD ...
+Hit any key to stop autoboot:  0
+Device: sdhci@e0100000
+Manufacturer ID: 2
+OEM: 544d
+Name: SA16G
+Tran Speed: 50000000
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 14.4 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+reading uEnv.txt
+7055 bytes read in 30 ms (229.5 KiB/s)
+Loaded environment from uEnv.txt
+Importing environment from SD ...
+Copying Linux from SD to RAM...
+reading uImage
+4019688 bytes read in 365 ms (10.5 MiB/s)
+reading devicetree.dtb
+16967 bytes read in 32 ms (517.6 KiB/s)
+reading uramdisk.image.gz
+5709113 bytes read in 508 ms (10.7 MiB/s)
+## Booting kernel from Legacy Image at 02080000 ...
+   Image Name:   Linux-4.19.0-g6edc6cd24b48-dirty
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    4019624 Bytes = 3.8 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+## Loading init Ramdisk from Legacy Image at 04000000 ...
+   Image Name:
+   Image Type:   ARM Linux RAMDisk Image (gzip compressed)
+   Data Size:    5709049 Bytes = 5.4 MiB
+   Load Address: 00000000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+## Flattened Device Tree blob at 02000000
+   Booting using the fdt blob at 0x2000000
+   Loading Kernel Image ... OK
+   Loading Ramdisk to 1fa8e000, end 1ffffcf9 ... OK
+   Loading Device Tree to 1fa86000, end 1fa8d246 ... OK
+
+Starting kernel ...
+
+Booting Linux on physical CPU 0x0
+......
+......
+......
+
+Welcome to ANTSDR
+pluto login:
+
+```
+Then you can input 
+username :root
+password : analog
+
+```
+Welcome to ANTSDR
+pluto login: root
+Password:
+Welcome to:
+    ___    _   _____________ ____  ____
+   /   |  / | / /_  __/ ___// __ \/ __ \
+  / /| | /  |/ / / /  \__ \/ / / / /_/ /
+ / ___ |/ /|  / / /  ___/ / /_/ / _, _/
+/_/  |_/_/ |_/ /_/  /____/_____/_/ |_|
+
+v0.32-dirty
+https://github.com/MicroPhase/antsdr-fw
+#
+```
+
+The antsdr has an ethernet port, so you can connect the antsdr to your SDR sofware through ethernet cable. The default IP address for ethernet port is **192.168.1.10**.
+
+```
+# ifconfig
+eth0      Link encap:Ethernet  HWaddr 00:0A:35:00:01:22
+          inet addr:192.168.1.10  Bcast:0.0.0.0  Mask:255.255.255.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+          Interrupt:28 Base address:0xb000
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+usb0      Link encap:Ethernet  HWaddr 00:05:F7:19:E7:93
+          inet addr:192.168.2.1  Bcast:0.0.0.0  Mask:255.255.255.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+```
+
+
 ## More than pluto
 Have you ever used [FMCOMMS2/3/4](https://wiki.analog.com/resources/eval/user-guides/ad-fmcomms2-ebz/quickstart/zynq) before? Have you ever thought about making ANTSDR into a similar device mentioned above?
 

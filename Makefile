@@ -187,7 +187,7 @@ build/$(TARGET).dfu: build/$(TARGET).itb
 clean-build:
 	rm -f $(notdir $(wildcard build/*))
 	rm -rf build/*
-	rm -rf build_sdimg/*
+	rm -rf build_sdimg
 
 clean:
 	make -C u-boot-xlnx clean
@@ -196,7 +196,7 @@ clean:
 	make -C hdl clean
 	rm -f $(notdir $(wildcard build/*))
 	rm -rf build/*
-	rm -rf build_sdimg/*
+	rm -rf build_sdimg
 
 SDIMGDIR = $(CURDIR)/build_sdimg
 sdimg: build/

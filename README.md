@@ -14,33 +14,43 @@ For now, here is a new hardware releases of ANTSDR, the hardware version will be
 ## ANTSDR Schematic
 The ANTSDR E310 schematic is in the [schematic folder](./schematic),  you can find the hardware design here.
 ![block-digram](./images/block-diagram.png)
+
 ## Build Instructions
+
 The ANTSDR Firmware is built with the [Xilinx Vivado 2019.1](https://www.xilinx.com/member/forms/download/xef-vivado.html?filename=Xilinx_Vivado_SDK_Web_2019.1_0524_1430_Lin64.bin). You need to install the correct Vivado Version in your linux PC, and then, you can follow the instructions below to generate the firmware for [ANTSDR E310](https://item.taobao.com/item.htm?spm=a230r.1.14.16.34e21142YIlxqx&id=647986963313&ns=1&abbucket=2#detail) or ANTSDR B220.
 
-### building ANTSDR E310 firmware
+#### Install build requirements
+
 ```bash
 sudo apt-get install git build-essential fakeroot libncurses5-dev libssl-dev ccache 
-sudo apt-get install dfu-util u-boot-tools device-tree-compiler libssl1.0-dev mtools
+sudo apt-get install dfu-util u-boot-tools device-tree-compiler mtools
 sudo apt-get install bc python cpio zip unzip rsync file wget 
-git clone --recursive https://github.com/MicroPhase/antsdr-fw.git 
-cd ansdr-fw 
+sudo apt-get install libtinfo5 device-tree-compiler bison flex u-boot-tools
+sudo apt-get purge gcc-arm-linux-gnueabihf
+sudo apt-get remove libfdt-de
+```
+
+#### Get source code and setup bash
+
+```bash
+git clone --recursive https://github.com/MicroPhase/antsdr-fw.git
 export CROSS_COMPILE=arm-linux-gnueabihf- 
 export PATH=$PATH:/opt/Xilinx/SDK/2019.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin 
 export VIVADO_SETTINGS=/opt/Xilinx/Vivado/2019.1/settings64.sh
+export PERL_MM_OPT=
+```
+
+### building ANTSDR E310 firmware
+
+```bash
+cd antsdr-fw 
 make
 ```
 
 ### building ANTSDR B220 firmware
 ```bash
-sudo apt-get install git build-essential fakeroot libncurses5-dev libssl-dev ccache 
-sudo apt-get install dfu-util u-boot-tools device-tree-compiler libssl1.0-dev mtools
-sudo apt-get install bc python cpio zip unzip rsync file wget 
-git clone --recursive https://github.com/MicroPhase/antsdr-fw.git 
-cd ansdr-fw 
+cd antsdr-fw 
 git checkout b220_v1.0
-export CROSS_COMPILE=arm-linux-gnueabihf- 
-export PATH=$PATH:/opt/Xilinx/SDK/2019.1/gnu/aarch32/lin/gcc-arm-linux-gnueabi/bin 
-export VIVADO_SETTINGS=/opt/Xilinx/Vivado/2019.1/settings64.sh
 make
 ```
 
@@ -248,7 +258,7 @@ The easiest way to make ANTSDR running FMCOMMS2/3/4 image could follow these ste
 
     ```
     U-Boot 2018.01-21439-gd244ce5869-dirty (Aug 16 2021 - 20:26:35 +0800)
-
+    
     Model: Zynq ANTSDR E310
     Board: Xilinx Zynq
     Silicon: v3.1
@@ -256,7 +266,7 @@ The easiest way to make ANTSDR running FMCOMMS2/3/4 image could follow these ste
     MMC:   sdhci@e0100000: 0 (SD)
     SF: Detected w25q256 with page size 256 Bytes, erase size 4 KiB, total 32 MiB
     *** Warning - bad CRC, using default environment
-
+    
     In:    serial@e0001000
     Out:   serial@e0001000
     Err:   serial@e0001000
@@ -299,11 +309,11 @@ The easiest way to make ANTSDR running FMCOMMS2/3/4 image could follow these ste
     Booting using the fdt blob at 0x2a00000
     Loading Kernel Image ... OK
     Loading Device Tree to 1fff8000, end 1ffffe58 ... OK
-
+    
     Starting kernel ...
-
+    
     Booting Linux on physical CPU 0x0
-
+    
     ......
     ......
     ......

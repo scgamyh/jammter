@@ -9,7 +9,10 @@ For Chinese users: [ANTSDR 淘宝链接](https://item.taobao.com/item.htm?id=647
 For Foreign users : [ANTSDR on AliExpress](https://www.aliexpress.com/item/1005003181244737.html?spm=5261.ProductManageOnline.0.0.15744edfIp5RL0)
 
 ## Update Info
-For now, here is a new hardware releases of ANTSDR, the hardware version will be named as **ANTSDR E310**, the older version of **ANTSDR B220** will not be spported any more. For the ANTSDR B220 user, follow the **Build Instructions** to build The corresponding firmware.
+
+- 2021-11-11: The linux kernel update to 5.10. Thanks for [bkerler's](https://github.com/bkerler) excellent work. 
+
+- 2021-07-03: For now, here is a new hardware releases of ANTSDR, the hardware version will be named as **ANTSDR E310**, the older version of **ANTSDR B220** will not be spported any more. For the ANTSDR B220 user, follow the **Build Instructions** to build The corresponding firmware.
 
 ## ANTSDR Schematic
 The ANTSDR E310 schematic is in the [schematic folder](./schematic),  you can find the hardware design here.
@@ -19,7 +22,7 @@ The ANTSDR E310 schematic is in the [schematic folder](./schematic),  you can fi
 
 The ANTSDR Firmware is built with the [Xilinx Vivado 2019.1](https://www.xilinx.com/member/forms/download/xef-vivado.html?filename=Xilinx_Vivado_SDK_Web_2019.1_0524_1430_Lin64.bin). You need to install the correct Vivado Version in your linux PC, and then, you can follow the instructions below to generate the firmware for [ANTSDR E310](https://item.taobao.com/item.htm?spm=a230r.1.14.16.34e21142YIlxqx&id=647986963313&ns=1&abbucket=2#detail) or ANTSDR B220.
 
-#### Install build requirements
+### Install build requirements
 
 ```bash
 sudo apt-get install git build-essential fakeroot libncurses5-dev libssl-dev ccache 
@@ -30,7 +33,7 @@ sudo apt-get purge gcc-arm-linux-gnueabihf
 sudo apt-get remove libfdt-de
 ```
 
-#### Get source code and setup bash
+### Get source code and setup bash
 
 ```bash
 git clone --recursive https://github.com/MicroPhase/antsdr-fw.git
@@ -40,21 +43,17 @@ export VIVADO_SETTINGS=/opt/Xilinx/Vivado/2019.1/settings64.sh
 export PERL_MM_OPT=
 ```
 
-### building ANTSDR E310 firmware
+### Building ANTSDR E310 firmware
 
 ```bash
 cd antsdr-fw 
 make
 ```
 
-### building ANTSDR B220 firmware
-```bash
-cd antsdr-fw 
-git checkout b220_v1.0
-make
-```
 
-## Build Artifacts 
+
+## Build Artifacts
+
 After the firmware building finished, you will see below file in the build folder. These files are used for flash updating.
 ```bash 
 wcc@wcc-dev:~/wcc/ansdr-fw$ ls -AGhl build 
@@ -187,8 +186,9 @@ username :root
 password : analog
 
 ```
+
 Welcome to ANTSDR
-pluto login: root
+ant login: root
 Password:
 Welcome to:
     ___    _   _____________ ____  ____
@@ -197,9 +197,10 @@ Welcome to:
  / ___ |/ /|  / / /  ___/ / /_/ / _, _/
 /_/  |_/_/ |_/ /_/  /____/_____/_/ |_|
 
-v0.32-dirty
+e310_v1.0-9-g014a-dirty
 https://github.com/MicroPhase/antsdr-fw
-#
+# uname -a
+Linux ant 5.10.0-97859-g8b0d44b63524 #3 SMP PREEMPT Thu Nov 11 16:20:04 CST 2021 armv7l GNU/Linux
 ```
 
 The antsdr has an ethernet port, so you can connect the antsdr to your SDR sofware through ethernet cable. The default IP address for ethernet port is **192.168.1.10**.

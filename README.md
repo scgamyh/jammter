@@ -9,6 +9,13 @@ For Chinese users: [ANTSDR 淘宝链接](https://item.taobao.com/item.htm?id=647
 For Foreign users : [ANTSDR on AliExpress](https://www.aliexpress.com/item/1005003181244737.html?spm=5261.ProductManageOnline.0.0.15744edfIp5RL0)
 
 ## Update Info
+- 2022-02-21: Add support for RF switch control to improve transceiver's performance.
+  Transmit tone wave at 2GHz:
+  ![2ghz.png](images/2ghz.png)
+  Transmit tone wave at 4GHz:
+  ![4ghz.png](images/4ghz.png)
+
+  RF performance still needs to be further optimized, wish better performance will be available in the next hardware production release. 
 
 - 2021-11-11: The linux kernel update to 5.10. Thanks for [bkerler's](https://github.com/bkerler) excellent work. 
 

@@ -38,7 +38,7 @@ $(error "      3] export VIVADO_VERSION=v20xx.x")
 endif
 
 TARGET ?= ant
-SUPPORTED_TARGETS:=pluto sidekiqz2 ant
+SUPPORTED_TARGETS:=pluto sidekiqz2 ant antsdre200
 
 # Include target specific constants
 include scripts/$(TARGET).mk
@@ -109,9 +109,9 @@ build/uImage: linux/arch/arm/boot/uImage  | build
 	cp $< $@
 
 ### Device Tree ###
-
-linux/arch/arm/boot/dts/%.dtb: linux/arch/arm/boot/dts/%.dts  linux/arch/arm/boot/dts/zynq-ant-sdr.dtsi
+linux/arch/arm/boot/dts/%.dtb: linux/arch/arm/boot/dts/%.dts  linux/arch/arm/boot/dts/zynq-$(TARGET).dtsi
 	make -C linux -j $(NCORES) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) $(notdir $@)
+
 
 build/%.dtb: linux/arch/arm/boot/dts/%.dtb | build
 	cp $< $@
@@ -136,14 +136,9 @@ build/$(TARGET).itb: u-boot-xlnx/tools/mkimage build/zImage build/rootfs.cpio.gz
 	u-boot-xlnx/tools/mkimage -f scripts/$(TARGET).its $@
 
 build/system_top.hdf:  | build
-ifeq (1, ${HAVE_VIVADO})
+
 	bash -c "source $(VIVADO_SETTINGS) && make -C hdl/projects/$(TARGET) && cp hdl/projects/$(TARGET)/$(TARGET).sdk/system_top.hdf $@"
 	unzip -l $@ | grep -q ps7_init || cp hdl/projects/$(TARGET)/$(TARGET).srcs/sources_1/bd/system/ip/system_sys_ps7_0/ps7_init* build/
-else
-ifneq ($(HDF_URL),)
-	wget -T 3 -t 1 -N --directory-prefix build $(HDF_URL)
-endif
-endif
 
 ### TODO: Build system_top.hdf from src if dl fails - need 2016.2 for that ...
 
@@ -205,7 +200,7 @@ sdimg: build/
 	cp build/sdk/hw_0/system_top.bit 	$(SDIMGDIR)/system_top.bit
 	cp build/u-boot.elf 			$(SDIMGDIR)/u-boot.elf
 	cp $(CURDIR)/linux/arch/arm/boot/uImage	$(SDIMGDIR)/uImage
-	cp build/zynq-$(TARGET)-sdr.dtb 	$(SDIMGDIR)/devicetree.dtb
+	cp build/zynq-$(TARGET).dtb 	$(SDIMGDIR)/devicetree.dtb
 	cp build/uboot-env.txt  		$(SDIMGDIR)/uEnv.txt
 	cp build/rootfs.cpio.gz  		$(SDIMGDIR)/ramdisk.image.gz
 	mkimage -A arm -T ramdisk -C gzip -d $(SDIMGDIR)/ramdisk.image.gz $(SDIMGDIR)/uramdisk.image.gz

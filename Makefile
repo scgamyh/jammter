@@ -38,7 +38,7 @@ $(error "      3] export VIVADO_VERSION=v20xx.x")
 endif
 
 TARGET ?= ant
-SUPPORTED_TARGETS:=pluto sidekiqz2 ant antsdre200
+SUPPORTED_TARGETS:=pluto sidekiqz2 ant antsdre200 e310v2
 
 # Include target specific constants
 include scripts/$(TARGET).mk

@@ -1,5 +1,15 @@
 # antsdr-fw
-## **This repository is public archived now, you can find a new repository for this firmware at [antsdr-fw-patch](https://github.com/MicroPhase/antsdr-fw-patch), which will track the upstream of plutosdr.**
+## NOTE 
+
+**:warning: :warning: :warning:** 
+**This repository is public archived now, you can find a new repository for this firmware at [antsdr-fw-patch](https://github.com/MicroPhase/antsdr-fw-patch), which will track the upstream of plutosdr.**
+**:warning: :warning: :warning:** 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ## Build Instructions
 
